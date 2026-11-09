@@ -4,9 +4,9 @@
    ============================================================ */
 :root{
   /* Palette de la charte Ynov Campus : neutres (gris, noir, blanc) + palette secondaire en dégradés */
-  --bg:#FFFFFF; --bg-2:#EAF0EB; --surface:#FFFFFF;
+  --bg:#EAF0EB; --bg-2:#DCE5DE; --surface:#FFFFFF;
   --ink:#0A0006; --ink-2:#2B2428; --muted:#5A5558; --faint:#8A8588;
-  --line:#DCE4DE; --line-2:#C8D2CB;
+  --line:#CFD9D2; --line-2:#B9C6BD;
   --accent:#0A0006; --accent-ink:#0A0006; --accent-soft:#EAF0EB;
   --rouge:#FF1A1A; --cyan:#00EAFF; --rose:#FF84EF; --violet:#859CFF; --jaune:#EEFF57; --bleu:#4A8CFF; --menthe:#5AFFB6; --vert:#018E4D;
   --coral:#FF1A1A; --coral-soft:#FFE6E6; --mint:#018E4D; --mint-soft:#DCF8EB; --lime:#EEFF57;
@@ -18,18 +18,20 @@
   --ease:cubic-bezier(.2,.7,.2,1);
   --wrap:1200px; --nav-h:72px;
   --f-head:"Bricolage Grotesque","Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-serif:"Newsreader","Source Serif 4",Georgia,"Times New Roman",serif;
   --f-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16.5px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16.5px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;
   animation:pageIn .6s var(--ease) both}
 @keyframes pageIn{from{opacity:0}to{opacity:1}}
 img,svg{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:var(--f-head);line-height:1.08;letter-spacing:-.02em;margin:0 0 .5em;font-weight:700;text-wrap:balance}
-h1{font-size:clamp(2.5rem,6vw,4.6rem);letter-spacing:-.035em}
-h2{font-size:clamp(1.9rem,3.6vw,2.9rem)}
+h1,h2,.quote{font-family:var(--f-serif);font-weight:500}
+h1{font-size:clamp(2.7rem,6.2vw,4.9rem);letter-spacing:-.025em;line-height:1.02}
+h2{font-size:clamp(2rem,3.8vw,3.1rem);letter-spacing:-.02em}
 h3{font-size:1.3rem;letter-spacing:-.015em}
 p{margin:0 0 1em;text-wrap:pretty}
 ::selection{background:var(--lime);color:var(--ink)}
@@ -47,7 +49,7 @@ p{margin:0 0 1em;text-wrap:pretty}
 .concept-bar button:hover{color:#fff}
 
 /* ---------- header ---------- */
-.site-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);
+.site-head{position:sticky;top:0;z-index:50;background:rgba(234,240,235,.86);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);
   border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
 .site-head.scrolled{border-color:var(--line);box-shadow:0 8px 24px -16px rgba(10,0,6,.2)}
 .nav{display:flex;align-items:center;height:var(--nav-h);gap:28px}
@@ -111,7 +113,7 @@ p{margin:0 0 1em;text-wrap:pretty}
 section{position:relative}
 .sec{padding:104px 0}
 .sec.tight{padding:72px 0}
-.sec.alt{background:var(--bg-2)}
+.sec.alt{background:#fff}
 .sec.dark{background:var(--ink);color:#fff}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 12.5px var(--f-body);text-transform:uppercase;letter-spacing:.11em;color:var(--accent-ink);margin-bottom:16px}
 .eyebrow::before{content:"";width:22px;height:2px;background:currentColor;border-radius:2px}
@@ -159,10 +161,10 @@ section{position:relative}
 .stat .s{font-size:13.5px;color:var(--muted)}
 
 /* ---------- marquee ---------- */
-.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--surface);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);border-color:transparent}
+.marquee{overflow:hidden;border-block:0;background:var(--ink);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);border-color:transparent}
 .marquee .track{display:flex;gap:14px;width:max-content;padding:22px 0;animation:marq 70s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
-.marquee .chip{font:600 17px var(--f-head);padding:10px 22px;border:1px solid var(--line-2);border-radius:999px;background:var(--bg);color:var(--ink-2);white-space:nowrap}
+.marquee .chip{font:600 17px var(--f-head);padding:10px 22px;border:1px solid rgba(234,240,235,.22);border-radius:999px;background:transparent;color:#EAF0EB;white-space:nowrap}
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* ---------- cartes ---------- */
@@ -464,3 +466,12 @@ form.demo.sent .ok{display:block;animation:fadeDown .5s var(--ease)}
 .g-media{--hg:linear-gradient(90deg,#FF1A1A,#FF84EF 55%,#EEFF57)}
 .g-archi{--hg:linear-gradient(90deg,#859CFF,#4A8CFF 50%,#018E4D)}
 .dotc{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:10px;vertical-align:baseline;box-shadow:inset 0 0 0 1px rgba(10,0,6,.12)}
+
+/* ---------- identité renforcée ---------- */
+.pole-card{position:relative}
+.pole-card::after{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--grain),var(--pg,var(--grad));background-blend-mode:soft-light,normal}
+.foot .brand i{background:var(--grain),var(--grad);background-blend-mode:soft-light,normal;color:var(--ink);box-shadow:none}
+.hero h1,.page-hero h1{font-variation-settings:"opsz" 72}
+.hero h1 em{font-style:italic}
+.sec-head h2,.cta-band h2{font-weight:500}
+.eyebrow{font-weight:700}

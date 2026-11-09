@@ -110,6 +110,7 @@ def cta_band(base, title="Candidatures ouvertes pour la rentrée 2027", text="Do
 
 
 POLE_G = {"#5AFFB6": "g-tech", "#FF84EF": "g-media", "#4A8CFF": "g-archi"}
+POLE_CSS = {"#5AFFB6": "linear-gradient(90deg,#EEFF57,#5AFFB6 30%,#00EAFF 62%,#859CFF)", "#FF84EF": "linear-gradient(90deg,#FF1A1A,#FF84EF 55%,#EEFF57)", "#4A8CFF": "linear-gradient(90deg,#859CFF,#4A8CFF 50%,#018E4D)"}
 
 
 def page_hero(base, crumbs, title, lead="", chips="", color="#859CFF"):
@@ -175,10 +176,10 @@ def page(path, title, body, desc="", current="", group="Pages", index=True, extr
     full = f'''<!DOCTYPE html>
 <html lang="fr" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · Ynov — concept de refonte</title><meta name="description" content="{esc(desc or title)}">
-<meta name="robots" content="noindex"><meta name="theme-color" content="#FFFFFF">
+<meta name="robots" content="noindex"><meta name="theme-color" content="#EAF0EB">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234F46FF'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='800' text-anchor='middle' fill='white' font-family='sans-serif'%3Ey%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{base}assets/style.css">{extra_head}</head>
 <body data-base="{base}">
 {header(base, current)}
@@ -220,7 +221,7 @@ def build_home():
     cards = ""
     for i, pl in enumerate(POLES):
         mets = "".join(f"<li>{esc(m)}</li>" for m in pl["metiers"][:4])
-        cards += (f'<a class="card pole-card reveal" style="--d:{i};--soft:{pl["soft"]};--c:{pl["color"]}" href="{pole_url(pl)}"><div class="verbs">{pl["verbes"]}</div><h3>{esc(pl["nom"])}</h3>'
+        cards += (f'<a class="card pole-card reveal" style="--d:{i};--soft:{pl["soft"]};--c:{pl["color"]};--pg:{POLE_CSS[pl["color"]]}" href="{pole_url(pl)}"><div class="verbs">{pl["verbes"]}</div><h3>{esc(pl["nom"])}</h3>'
                   f'<p>{esc(pl["intro"])}</p><ul>{mets}</ul><span class="more">Découvrir le pôle <span>→</span></span></a>')
     b += f'<section class="sec"><div class="wrap">{sec_head("3 pôles d’excellence", "Trois regards, trois manières d’intervenir sur le réel.", "Ces pôles portent la transformation digitale des nouveaux métiers. Ils ne se mélangent pas : ils dialoguent, sur des projets communs.")}<div class="grid g3">{cards}</div></div></section>'
 
