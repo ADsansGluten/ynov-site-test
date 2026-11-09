@@ -12,9 +12,9 @@
   --coral:#FF1A1A; --coral-soft:#FFE6E6; --mint:#018E4D; --mint-soft:#DCF8EB; --lime:#EEFF57;
   --grad:linear-gradient(90deg,#FF1A1A,#FF84EF 20%,#EEFF57 38%,#5AFFB6 56%,#00EAFF 72%,#859CFF 86%,#4A8CFF);
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --r-s:10px; --r-m:16px; --r-l:24px; --r-xl:32px;
-  --shadow-1:0 1px 2px rgba(10,0,6,.04),0 4px 14px rgba(10,0,6,.05);
-  --shadow-2:0 2px 4px rgba(10,0,6,.05),0 18px 40px -12px rgba(10,0,6,.18);
+  --r-s:6px; --r-m:10px; --r-l:14px; --r-xl:18px;
+  --shadow-1:none;
+  --shadow-2:0 0 0 1px var(--ink);
   --ease:cubic-bezier(.2,.7,.2,1);
   --wrap:1200px; --nav-h:72px;
   --f-head:"Bricolage Grotesque","Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -134,7 +134,7 @@ section{position:relative}
 .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
 .hero h1 .w>span{display:inline-block;transform:translateY(112%);animation:wordUp .9s var(--ease) forwards;animation-delay:calc(var(--i)*70ms + 150ms)}
 @keyframes wordUp{to{transform:none}}
-.hero h1 em{font-style:normal;background:linear-gradient(100deg,#4A8CFF,#859CFF 40%,#FF84EF 75%,#FF1A1A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 em{font-style:italic;color:inherit;background:var(--grain) 0 94%/100% .09em no-repeat,var(--grad) 0 94%/100% .09em no-repeat;background-blend-mode:soft-light,normal;padding-bottom:.04em}
 .hero .lead{max-width:560px;margin:26px 0 34px}
 .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
 .hero-visual{position:relative;height:500px}
@@ -179,8 +179,6 @@ a.card:hover,.card.hov:hover{transform:translateY(-6px);box-shadow:var(--shadow-
 .card .more span{transition:transform .35s var(--ease)}
 a.card:hover .more span{transform:translateX(5px)}
 .pole-card{padding:34px;overflow:hidden;min-height:340px}
-.pole-card::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--soft);transition:transform .7s var(--ease)}
-a.pole-card:hover::before{transform:scale(1.35)}
 .pole-card>*{position:relative}
 .pole-card .verbs{font:600 13px var(--f-body);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;color:var(--ink);display:flex;align-items:center;gap:8px}
 .pole-card .verbs::before{content:"";width:22px;height:6px;border-radius:6px;background:var(--c);flex:none}
@@ -214,7 +212,7 @@ a.card:hover .motif{transform:rotate(12deg) scale(1.08)}
 .checks{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:14px}
 .checks li{display:flex;gap:14px;align-items:flex-start}
 .checks li::before{content:"";flex:none;width:24px;height:24px;border-radius:50%;margin-top:2px;background:var(--mint-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' fill='none' stroke='%230E9F6E' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 5 3.5 3.5L11 1.5'/%3E%3C/svg%3E") center/12px no-repeat}
-.big-num{font:800 clamp(4rem,9vw,7.5rem) var(--f-head);letter-spacing:-.05em;line-height:.9;background:linear-gradient(120deg,#4A8CFF,#859CFF 45%,#FF84EF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big-num{font:800 clamp(4rem,9vw,7.5rem) var(--f-head);letter-spacing:-.05em;line-height:.9;color:var(--ink)}
 .rhythm{display:grid;gap:14px}
 .rhythm .row{display:flex;height:56px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
 .rhythm .row div{display:grid;place-items:center;font:600 14px var(--f-body)}
@@ -472,6 +470,29 @@ form.demo.sent .ok{display:block;animation:fadeDown .5s var(--ease)}
 .pole-card::after{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--grain),var(--pg,var(--grad));background-blend-mode:soft-light,normal}
 .foot .brand i{background:var(--grain),var(--grad);background-blend-mode:soft-light,normal;color:var(--ink);box-shadow:none}
 .hero h1,.page-hero h1{font-variation-settings:"opsz" 72}
-.hero h1 em{font-style:italic}
+.hero h1 em{font-style:italic;color:inherit;background:var(--grain) 0 94%/100% .09em no-repeat,var(--grad) 0 94%/100% .09em no-repeat;background-blend-mode:soft-light,normal;padding-bottom:.04em}
 .sec-head h2,.cta-band h2{font-weight:500}
 .eyebrow{font-weight:700}
+
+/* ---------- moins « template », plus éditorial ---------- */
+.hero .blob,.page-hero .blob{display:none}
+.hero{padding:64px 0 56px}
+.hero-index{border-top:2px solid var(--ink);align-self:center}
+.hi{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;padding:26px 4px;border-bottom:1px solid var(--line-2);position:relative;transition:background .3s,padding .4s var(--ease)}
+.hi:hover{background:#fff;padding-left:18px;padding-right:18px}
+.hi-bar{position:absolute;left:0;bottom:-1px;height:6px;width:0;background:var(--grain),var(--pg);background-blend-mode:soft-light,normal;transition:width .6s var(--ease)}
+.hi:hover .hi-bar{width:100%}
+.hi-n{font:600 13px var(--f-body);letter-spacing:.1em;color:var(--muted)}
+.hi h3{font-family:var(--f-serif);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.8rem);margin:0 0 4px;letter-spacing:-.01em}
+.hi p{margin:0;font-size:14.5px;color:var(--muted)}
+.hi-a{font-size:22px;transition:transform .3s var(--ease)}
+.hi:hover .hi-a{transform:translateX(6px)}
+.band{height:10px;background:var(--grain),var(--grad);background-blend-mode:soft-light,normal}
+.shape{display:block;width:30px;height:30px;margin-bottom:20px}
+.shape.s1{border-radius:50%;background:var(--bleu)}
+.shape.s2{background:var(--rose);border-radius:10px 10px 10px 0}
+.shape.s3{background:var(--menthe);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.card,.prog,.side-card,.finder,.proj-feature,.stats-strip{border-radius:var(--r-m)}
+.card:hover,.prog:hover,.proj-feature:hover{box-shadow:none;border-color:var(--ink)}
+.hv-card{display:none}
+@media (max-width:1060px){.hero-index{margin-top:28px}}

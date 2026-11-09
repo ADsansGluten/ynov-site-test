@@ -196,26 +196,23 @@ def page(path, title, body, desc="", current="", group="Pages", index=True, extr
 # ================================================================== PAGES
 def build_home():
     b = ""
-    hero_words = [("Ton", 0, False), ("avenir", 1, False), ("se", 2, False), ("construit", 3, False), ("en", 4, False), ("faisant.", 5, True)]
+    hero_words = [("Apprends", 0, False), ("en", 1, False), ("construisant.", 2, True)]
     h1 = " ".join(f'<span class="w"><span style="--i:{i}">{("<em>"+w+"</em>") if em else w}</span></span>' for w, i, em in hero_words)
-    b += f'''<section class="hero"><div class="blob"></div><div class="blob b2"></div><div class="wrap">
+    hi = "".join(f'<a class="hi" href="{pole_url(pl)}" style="--pg:{POLE_CSS[pl["color"]]}"><i class="hi-bar"></i><span class="hi-n">0{i+1}</span><div><h3>{esc(pl["nom"])}</h3><p>{pl["verbes"]}</p></div><span class="hi-a">→</span></a>' for i, pl in enumerate(POLES))
+    b += f'''<section class="hero"><div class="wrap">
 <div class="hero-grid"><div>
 <a class="pill reveal" href="{"admission.html"}"><b>Rentrée 2027</b> Candidatures ouvertes depuis le 1er octobre <span>→</span></a>
 <h1>{h1}</h1>
-<p class="lead reveal" style="--d:3">Ynov est l'école des transformations digitales : des formations en 2, 3 ou 5 ans, du BTS au Mastère, en initial ou en alternance, avec des projets réels dès le premier jour.</p>
+<p class="lead reveal" style="--d:3">Ynov forme aux métiers du numérique, de la création et du bâtiment. Du BTS au Mastère, en 2, 3 ou 5 ans, en initial ou en alternance, avec des projets réels dès le premier jour.</p>
 <div class="cta reveal" style="--d:4"><a class="btn btn-primary" href="admission.html#candidater">Candidater {arrow()}</a><a class="btn btn-ghost" href="formations/index.html">Explorer les {len(P)} formations</a></div>
 </div>
-<div class="hero-visual" aria-hidden="true">
-<div class="hv-card c1 hv-float"><span class="tag" style="background:#DDFFF1;color:#0A0006">Technologies &amp; Ingénierie</span><h3>Coder · Sécuriser · Automatiser</h3><p>IA, data, cybersécurité, cloud.</p><div class="bars" style="--c:#4F46FF"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i></div></div>
-<div class="hv-card c2 hv-float"><span class="tag" style="background:#FFE8FB;color:#0A0006">Médias &amp; Création</span><h3>Imaginer · Créer · Médiatiser</h3><p>3D, jeu vidéo, design, audiovisuel, marketing.</p><div class="bars" style="--c:#FF5C39"><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i></div></div>
-<div class="hv-card c3 hv-float"><span class="tag" style="background:#E3EDFF;color:#0A0006">Architectures &amp; Bâtiment</span><h3>Concevoir · Construire · Transformer</h3><p>Architecture d'intérieur, BIM, jumeaux numériques.</p><div class="bars" style="--c:#0E9F6E"><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i></div></div>
-</div></div>
+<nav class="hero-index reveal" style="--d:2" aria-label="Les trois pôles">{hi}</nav></div>
 <div class="stats-strip reveal">''' + "".join(
-        f'<div class="stat"><div class="n"><span data-count="{n.replace(" ", "").replace("+", "")}" data-suffix="{"+" if "+" in n else ""}">{n}</span></div><div class="l">{l}</div><div class="s">{s}</div></div>' for n, l, s in STATS) + '''</div></div></section>'''
+        f'<div class="stat"><div class="n"><span data-count="{n.replace(" ", "").replace("+", "")}" data-suffix="{"+" if "+" in n else ""}">{n}</span></div><div class="l">{l}</div><div class="s">{s}</div></div>' for n, l, s in STATS) + '</div></div></section>'
 
     chips = ["3D & Gaming", "UX Design", "Création vidéo", "Influence", "Programmation", "Ethical hacking", "Web apps", "IA & Machine learning", "Big data", "Cybersécurité", "Maîtrise d'œuvre",
              "Jumeaux numériques", "Architecture d'intérieur", "Design d'espace", "BIM", "Rénovation"]
-    b += '<div class="marquee" aria-hidden="true"><div class="track">' + "".join(f'<span class="chip">{c}</span>' for c in chips * 2) + '</div></div>'
+    b += '<div class="band" aria-hidden="true"></div><div class="marquee" aria-hidden="true"><div class="track">' + "".join(f'<span class="chip">{c}</span>' for c in chips * 2) + '</div></div>'
 
     # pôles
     cards = ""
@@ -223,7 +220,7 @@ def build_home():
         mets = "".join(f"<li>{esc(m)}</li>" for m in pl["metiers"][:4])
         cards += (f'<a class="card pole-card reveal" style="--d:{i};--soft:{pl["soft"]};--c:{pl["color"]};--pg:{POLE_CSS[pl["color"]]}" href="{pole_url(pl)}"><div class="verbs">{pl["verbes"]}</div><h3>{esc(pl["nom"])}</h3>'
                   f'<p>{esc(pl["intro"])}</p><ul>{mets}</ul><span class="more">Découvrir le pôle <span>→</span></span></a>')
-    b += f'<section class="sec"><div class="wrap">{sec_head("3 pôles d’excellence", "Trois regards, trois manières d’intervenir sur le réel.", "Ces pôles portent la transformation digitale des nouveaux métiers. Ils ne se mélangent pas : ils dialoguent, sur des projets communs.")}<div class="grid g3">{cards}</div></div></section>'
+    b += f'<section class="sec"><div class="wrap">{sec_head("Trois pôles", "Trois pôles de formation.", "Technologies, création, bâtiment : trois domaines qui travaillent ensemble sur des projets communs.")}<div class="grid g3">{cards}</div></div></section>'
 
     # finder + familles
     fopts = "".join(f'<option value="{f["slug"]}">{esc(f["nom"])}</option>' for f in FAMILLES)
@@ -238,7 +235,7 @@ def build_home():
 <div class="field"><label for="f-f">Dans le domaine</label><select id="f-f" name="fam"><option value="">Tous les domaines</option>{fopts}</select></div>
 <div class="field"><label for="f-c">Sur le campus</label><select id="f-c" name="campus"><option value="">Partout en France</option>{copts}</select></div>
 <button class="btn btn-accent" type="submit">Trouver {arrow()}</button></form>
-<div style="height:96px"></div>{sec_head("9 domaines", "Du BTS au Mastère, une formation pour chaque envie.", f"{len(P)} programmes, tous accessibles en alternance selon le niveau.")}
+<div style="height:96px"></div>{sec_head("Domaines", f"Neuf domaines, {len(P)} formations.", "Du BTS au Mastère, toutes accessibles en alternance selon le niveau.")}
 <div class="grid g3">{fam_cards}</div></div></section>'''
 
     # pédagogie
@@ -249,7 +246,7 @@ def build_home():
 
     # projets étudiants
     pcards = "".join(f'<a class="proj-feature reveal" style="--d:{i}" href="projets/{pj["slug"]}.html"><div><span class="badge b-Bachelor">Projet étudiant</span><h3>{esc(pj["titre"])}</h3><p>{esc(pj["accroche"])}</p><div class="tagrow">' + "".join(f"<span>{esc(t)}</span>" for t in pj["tags"]) + f'</div><span class="link-ar">Découvrir <span>→</span></span></div><div class="pf-vis pf-{pj["slug"]}" aria-hidden="true"></div></a>' for i, pj in enumerate(PROJETS))
-    b += f'<section class="sec"><div class="wrap">{sec_head("Projets étudiants", "Ce que les étudiants construisent dès la première année.", "Deux exemples de projets de B1, réalisés à Ynov Sophia.")}<div class="grid g2">{pcards}</div><p style="margin-top:28px"><a class="link-ar" href="projets.html">Tous les projets étudiants <span>→</span></a></p></div></section>'
+    b += f'<section class="sec"><div class="wrap">{sec_head("Projets étudiants", "Projets de première année.", "Deux exemples réalisés par des étudiants de B1 à Ynov Sophia.")}<div class="grid g2">{pcards}</div><p style="margin-top:28px"><a class="link-ar" href="projets.html">Tous les projets étudiants <span>→</span></a></p></div></section>'
 
     # alternance
     b += f'''<section class="sec"><div class="wrap split"><div class="reveal"><span class="eyebrow">Alternance</span><h2>2 à 3 années d’expérience professionnelle à la sortie.</h2>
@@ -262,7 +259,7 @@ def build_home():
     # carte campus
     cl = "".join(f'<a href="{campus_url(c)}" data-c="{c[0]}"><span>{esc(c[2])}</span><small>{len([p for p in P if c[0] in p["campus"]])} formations</small></a>' for c in CAMPUS)
     cl += '<a class="online" href="campus/connect.html"><span>Connect — 100 % en ligne</span><small>alternance à distance</small></a>'
-    b += f'''<section class="sec alt"><div class="wrap">{sec_head("14 campus", "Au cœur des grandes métropoles.", "13 campus physiques et un campus 100 % en ligne. Survole la carte, clique sur ta ville.")}
+    b += f'''<section class="sec alt"><div class="wrap">{sec_head("Campus", "14 campus en France.", "13 campus physiques et un campus 100 % en ligne. Choisis ta ville sur la carte.")}
 <div class="mapbox"><div class="fr-map reveal">{fr_map("")}</div><div class="campus-list reveal" style="--d:1">{cl}</div></div></div></section>'''
 
     # actus
@@ -271,7 +268,7 @@ def build_home():
     items = f'<a class="news-item big reveal" href="actualites.html"><time>{d_fr(big[0], True)}</time><span class="cat">{esc(big[2])}</span><h3>{esc(big[1])}</h3></a>'
     for i, (dt, t, cat) in enumerate(n[1:]):
         items += f'<a class="news-item reveal" style="--d:{i+1}" href="actualites.html"><time>{d_fr(dt, True)}</time><span class="cat">{esc(cat)}</span><h3>{esc(t)}</h3></a>'
-    b += f'<section class="sec"><div class="wrap">{sec_head("Actualités", "Ce qui se passe dans les campus.")}<div class="news">{items}</div><p style="margin-top:32px"><a class="link-ar" href="actualites.html">Toutes les actualités <span>→</span></a></p></div></section>'
+    b += f'<section class="sec"><div class="wrap">{sec_head("Actualités", "Les actualités des campus.")}<div class="news">{items}</div><p style="margin-top:32px"><a class="link-ar" href="actualites.html">Toutes les actualités <span>→</span></a></p></div></section>'
 
     # confiance
     part = ["Cheops Technology", "SFR Business", "Autodesk", "Dassault Systèmes", "Blackmagic Design", "Unreal Engine", "Graphisoft", "La Banque Postale", "CGI", "Webedia", "Trimble", "Hugging Face", "Formica"]
@@ -469,9 +466,9 @@ def build_static():
     # Vie de campus
     prose_page("vie-de-campus.html", "La vie de campus", "Un campus, c’est là où il se passe quelque chose.", [("Vie de campus", None)],
                f'''<section class="sec" style="padding-top:20px"><div class="wrap"><div class="grid g3">
-<div class="card hov reveal"><div class="ic" style="background:var(--accent-soft)">🎬</div><h3>Des équipements pour créer</h3><p style="margin:0">Plateaux TV, studios son, salles gaming, labos informatiques : selon les campus et les formations.</p></div>
-<div class="card hov reveal" style="--d:1"><div class="ic" style="background:var(--coral-soft)">🎉</div><h3>Des événements toute l’année</h3><p style="margin:0">Halloween Creators Festival, concours d’éloquence, concours national d’architecture d’intérieur, e-sport league, Paris Games Week.</p></div>
-<div class="card hov reveal" style="--d:2"><div class="ic" style="background:var(--mint-soft)">🤝</div><h3>Une vie associative active</h3><p style="margin:0">BDE, BDS, tournois sportifs, soirées, week-ends : les étudiants font vivre le campus.</p></div></div>
+<div class="card hov reveal"><i class="shape s1"></i><h3>Des équipements pour créer</h3><p style="margin:0">Plateaux TV, studios son, salles gaming, labos informatiques : selon les campus et les formations.</p></div>
+<div class="card hov reveal" style="--d:1"><i class="shape s2"></i><h3>Des événements toute l’année</h3><p style="margin:0">Halloween Creators Festival, concours d’éloquence, concours national d’architecture d’intérieur, e-sport league, Paris Games Week.</p></div>
+<div class="card hov reveal" style="--d:2"><i class="shape s3"></i><h3>Une vie associative active</h3><p style="margin:0">BDE, BDS, tournois sportifs, soirées, week-ends : les étudiants font vivre le campus.</p></div></div>
 <h2 class="reveal" style="margin-top:80px">Concours national d’architecture d’intérieur</h2>
 <p class="lead reveal" style="max-width:760px">Organisé avec Formica® : concevoir une chambre d’hôtel 4 étoiles de 20 m². Réservé aux lycéens de Terminale et aux étudiants de 3e année de Bachelor et de Mastère, avec une année de scolarité offerte pour les lauréats lycéens.</p>
 <h2 class="reveal" style="margin-top:56px">Ystart, l’incubateur étudiant</h2><p class="lead reveal" style="max-width:760px">Pour passer d’une idée de projet à une entreprise, pendant tes études. <a class="link-ar" href="ystart.html">En savoir plus <span>→</span></a></p></div></section>''', "about")
