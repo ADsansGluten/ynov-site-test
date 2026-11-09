@@ -109,9 +109,12 @@ def cta_band(base, title="Candidatures ouvertes pour la rentrée 2027", text="Do
             f'<div class="acts"><a class="btn btn-lime" href="{base}admission.html#candidater">Candidater {arrow()}</a>{b2}</div></div>')
 
 
-def page_hero(base, crumbs, title, lead="", chips="", color="#B6B0FF"):
+POLE_G = {"#5AFFB6": "g-tech", "#FF84EF": "g-media", "#4A8CFF": "g-archi"}
+
+
+def page_hero(base, crumbs, title, lead="", chips="", color="#859CFF"):
     cr = "".join(f'<span>{f"<a href=\"{base}{u}\">{esc(t)}</a>" if u else esc(t)}</span>' for t, u in crumbs)
-    return (f'<section class="page-hero" style="--hc:{color}"><div class="blob"></div><div class="wrap"><nav class="crumbs" aria-label="Fil d’Ariane">{cr}</nav>'
+    return (f'<section class="page-hero {POLE_G.get(color, "")}" style="--hc:{color}"><div class="blob"></div><div class="wrap"><nav class="crumbs" aria-label="Fil d’Ariane">{cr}</nav>'
             f'<h1 class="reveal">{title}</h1>{f"<p class=\"lead reveal\" style=\"--d:1\">{lead}</p>" if lead else ""}{chips}</div></section>')
 
 
@@ -172,7 +175,7 @@ def page(path, title, body, desc="", current="", group="Pages", index=True, extr
     full = f'''<!DOCTYPE html>
 <html lang="fr" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · Ynov — concept de refonte</title><meta name="description" content="{esc(desc or title)}">
-<meta name="robots" content="noindex"><meta name="theme-color" content="#FBFAF6">
+<meta name="robots" content="noindex"><meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234F46FF'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='800' text-anchor='middle' fill='white' font-family='sans-serif'%3Ey%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -202,9 +205,9 @@ def build_home():
 <div class="cta reveal" style="--d:4"><a class="btn btn-primary" href="admission.html#candidater">Candidater {arrow()}</a><a class="btn btn-ghost" href="formations/index.html">Explorer les {len(P)} formations</a></div>
 </div>
 <div class="hero-visual" aria-hidden="true">
-<div class="hv-card c1 hv-float"><span class="tag" style="background:#ECEBFF;color:#2E27C9">Technologies &amp; Ingénierie</span><h3>Coder · Sécuriser · Automatiser</h3><p>IA, data, cybersécurité, cloud.</p><div class="bars" style="--c:#4F46FF"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i></div></div>
-<div class="hv-card c2 hv-float"><span class="tag" style="background:#FFEDE8;color:#C23A1B">Médias &amp; Création</span><h3>Imaginer · Créer · Médiatiser</h3><p>3D, jeu vidéo, design, audiovisuel, marketing.</p><div class="bars" style="--c:#FF5C39"><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i></div></div>
-<div class="hv-card c3 hv-float"><span class="tag" style="background:#E4F7EE;color:#08704D">Architectures &amp; Bâtiment</span><h3>Concevoir · Construire · Transformer</h3><p>Architecture d'intérieur, BIM, jumeaux numériques.</p><div class="bars" style="--c:#0E9F6E"><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i></div></div>
+<div class="hv-card c1 hv-float"><span class="tag" style="background:#DDFFF1;color:#0A0006">Technologies &amp; Ingénierie</span><h3>Coder · Sécuriser · Automatiser</h3><p>IA, data, cybersécurité, cloud.</p><div class="bars" style="--c:#4F46FF"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i></div></div>
+<div class="hv-card c2 hv-float"><span class="tag" style="background:#FFE8FB;color:#0A0006">Médias &amp; Création</span><h3>Imaginer · Créer · Médiatiser</h3><p>3D, jeu vidéo, design, audiovisuel, marketing.</p><div class="bars" style="--c:#FF5C39"><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i></div></div>
+<div class="hv-card c3 hv-float"><span class="tag" style="background:#E3EDFF;color:#0A0006">Architectures &amp; Bâtiment</span><h3>Concevoir · Construire · Transformer</h3><p>Architecture d'intérieur, BIM, jumeaux numériques.</p><div class="bars" style="--c:#0E9F6E"><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i></div></div>
 </div></div>
 <div class="stats-strip reveal">''' + "".join(
         f'<div class="stat"><div class="n"><span data-count="{n.replace(" ", "").replace("+", "")}" data-suffix="{"+" if "+" in n else ""}">{n}</span></div><div class="l">{l}</div><div class="s">{s}</div></div>' for n, l, s in STATS) + '''</div></div></section>'''
@@ -240,7 +243,7 @@ def build_home():
     # pédagogie
     ped = "".join(f'<div class="reveal" style="--d:{i}"><div class="t">{t}</div><span class="d">{d}</span><p>{esc(x)}</p></div>' for i, (t, d, x) in enumerate(PEDAGOGIE))
     b += f'''<section class="sec dark"><div class="wrap"><div class="sec-head"><div class="reveal"><span class="eyebrow">Learning by doing</span><h2>Avant, tu allais en cours.<br>Chez Ynov, tu diriges des projets.</h2></div>
-<p class="reveal" style="--d:1;color:#BDBFD8">Une idée se teste, se confronte au réel, se présente, s'améliore. La première réponse est rarement la meilleure, et recommencer, c'est déjà avancer.</p></div>
+<p class="reveal" style="--d:1;color:#C3CAC5">Une idée se teste, se confronte au réel, se présente, s'améliore. La première réponse est rarement la meilleure, et recommencer, c'est déjà avancer.</p></div>
 <div class="ped">{ped}</div><p style="margin-top:34px"><a class="btn btn-lime" href="pedagogie.html">Comprendre la pédagogie {arrow()}</a></p></div></section>'''
 
     # projets étudiants
@@ -360,7 +363,7 @@ def build_domaines_poles():
         fams = "".join(f'<a class="card fam-card reveal" style="--d:{k}" href="{base}{fam_url(f)}">{motif(FAM_ORDER[f["slug"]], pl["color"])}<h3 style="margin-top:36px">{esc(f["nom"])}</h3><p>{esc(f["accroche"])}</p>'
                        f'<span class="count">{len([p for p in P if p["fam"]==f["slug"]])} formations</span></a>' for k, f in enumerate([f for f in FAMILLES if f["pole"] == pl["slug"]]))
         mets = "".join(f"<li>{esc(m)}</li>" for m in pl["metiers"])
-        body = page_hero(base, [("Accueil", "index.html"), ("Formations", "formations/index.html"), (pl["nom"], None)], esc(pl["nom"]), esc(pl["intro"]), f'<p class="reveal" style="margin-top:18px;font:700 14px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:{pl["color"]}">{pl["verbes"]}</p>', pl["color"])
+        body = page_hero(base, [("Accueil", "index.html"), ("Formations", "formations/index.html"), (pl["nom"], None)], esc(pl["nom"]), esc(pl["intro"]), f'<p class="reveal" style="margin-top:18px;font:700 14px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)"><i class="dotc" style="background:{pl["color"]}"></i>{pl["verbes"]}</p>', pl["color"])
         body += f'''<section class="sec" style="padding-top:20px"><div class="wrap"><div class="prose reveal"><p class="lead">{esc(pl["corps"])}</p></div>
 <h2 class="reveal" style="margin-top:56px">Les domaines de formation</h2><div class="grid g3">{fams}</div>
 <h2 class="reveal" style="margin-top:72px">Tu deviendras…</h2><ul class="pill-list reveal">{mets}</ul></div></section>
@@ -375,10 +378,10 @@ def build_campus():
         n = len([p for p in P if c[0] in p["campus"]])
         nxt = sorted([j for j in JPO if j[0] == c[0]], key=lambda x: x[1])
         j = f'<span class="count">Prochaine JPO : {d_fr(nxt[0][1])}</span>' if nxt else ""
-        cards += (f'<a class="card fam-card reveal" style="--d:{k%3}" href="../{campus_url(c)}">{motif(k,"#4F46FF" if k%3==0 else "#FF5C39" if k%3==1 else "#0E9F6E")}<span class="num">{k+1:02d}</span>'
+        cards += (f'<a class="card fam-card reveal" style="--d:{k%3}" href="../{campus_url(c)}">{motif(k,"#4A8CFF" if k%3==0 else "#FF84EF" if k%3==1 else "#5AFFB6")}<span class="num">{k+1:02d}</span>'
                   f'<h3 style="margin-top:36px">{esc(c[2])}</h3><p style="margin-bottom:12px">{esc(c[3])} · {n} formations</p>{j}</a>')
-    cards += (f'<a class="card fam-card reveal" href="connect.html" style="background:var(--ink);color:#fff;border-color:var(--ink)">{motif(3, "#D6F26B")}<span class="num" style="color:#A9ABCB">14</span>'
-              f'<h3 style="margin-top:36px">Connect</h3><p style="color:#BDBFD8;margin-bottom:12px">Le campus 100 % en ligne, avec alternance.</p><span class="count">{len([p for p in P if p["online"]])} formations</span></a>')
+    cards += (f'<a class="card fam-card reveal" href="connect.html" style="background:var(--ink);color:#fff;border-color:var(--ink)">{motif(3, "#EEFF57")}<span class="num" style="color:#A5ADA8">14</span>'
+              f'<h3 style="margin-top:36px">Connect</h3><p style="color:#C3CAC5;margin-bottom:12px">Le campus 100 % en ligne, avec alternance.</p><span class="count">{len([p for p in P if p["online"]])} formations</span></a>')
     body = page_hero("../", [("Accueil", "index.html"), ("Campus", None)], "14 campus, partout en France", "Des campus modernes et inspirants au cœur des grandes villes — et un campus 100 % en ligne.")
     body += f'''<section class="sec" style="padding-top:10px"><div class="wrap"><div class="mapbox" style="margin-bottom:64px"><div class="fr-map reveal">{fr_map("../")}</div>
 <div class="reveal" style="--d:1"><span class="eyebrow">Des lieux pour apprendre</span><h2>Un campus, ce n’est pas un endroit où tu passes.</h2><p class="lead">C’est là où il se passe quelque chose : cours, travail individuel, projets collectifs, présentations, événements, plateaux TV, studios son, salles gaming, labos informatiques.</p>
@@ -415,7 +418,7 @@ def build_campus():
             extra = '<div class="callout reveal" style="margin-top:56px">Campus ouvert en 2024.</div>'
         chips = f'<div class="meta-chips"><span class="mchip">📍 <b>{esc(c[3])}</b></span><span class="mchip"><b>{len(progs)}</b> formations</span><span class="mchip">Alternance dès le Bachelor 2/3 &amp; au Mastère</span></div>'
         body = page_hero(base, [("Accueil", "index.html"), ("Campus", "campus/index.html"), (c[2], None)], f"Ynov {esc(c[2])}",
-                         f"Un campus au cœur de {esc(c[3].split(' (')[0])} : {len(progs)} formations du BTS au Mastère, des projets réels et un réseau d’entreprises partenaires.", chips, "#B6B0FF")
+                         f"Un campus au cœur de {esc(c[3].split(' (')[0])} : {len(progs)} formations du BTS au Mastère, des projets réels et un réseau d’entreprises partenaires.", chips, "#859CFF")
         body += f'<section class="sec" style="padding-top:10px"><div class="wrap"><h2 class="reveal">Les formations à {esc(c[2])}</h2>{blocks}{jpo_sec}{extra}</div></section><section class="sec" style="padding:20px 0 90px"><div class="wrap">{cta_band(base, "Rejoins le campus de " + esc(c[2]))}</div></section>'
         page(campus_url(c), f"Campus {c[2]}", body, f"Ynov {c[2]} : formations, portes ouvertes, équipe.", "campus", "Campus")
 
@@ -423,14 +426,14 @@ def build_campus():
     on = [p for p in P_SORTED if p["online"]]
     only = [p for p in on if not p["campus"]]
     body = page_hero("../", [("Accueil", "index.html"), ("Campus", "campus/index.html"), ("Connect", None)], "Connect, le campus 100 % en ligne",
-                     "Étudier chez Ynov à distance, avec alternance. Depuis la rentrée 2025, un campus virtuel immersif et gamifié.", f'<div class="meta-chips"><span class="mchip"><b>{len(on)}</b> formations en ligne</span><span class="mchip"><b>{len(only)}</b> exclusives à Connect</span></div>', "#D6F26B")
+                     "Étudier chez Ynov à distance, avec alternance. Depuis la rentrée 2025, un campus virtuel immersif et gamifié.", f'<div class="meta-chips"><span class="mchip"><b>{len(on)}</b> formations en ligne</span><span class="mchip"><b>{len(only)}</b> exclusives à Connect</span></div>', "#EEFF57")
     body += f'<section class="sec" style="padding-top:10px"><div class="wrap"><h2 class="reveal">Exclusives à Connect</h2><div class="grid g2">{"".join(prog_card(p, "../", i) for i, p in enumerate(only))}</div>' \
             f'<h2 class="reveal" style="margin-top:64px">Aussi disponibles en ligne</h2><div class="grid g2">{"".join(prog_card(p, "../", i) for i, p in enumerate([x for x in on if x["campus"]]))}</div></div></section>' \
             f'<section class="sec" style="padding:20px 0 90px"><div class="wrap">{cta_band("../")}</div></section>'
     page("campus/connect.html", "Connect – campus en ligne", body, "Le campus 100 % en ligne d'Ynov.", "campus", "Campus")
 
 
-def prose_page(path, title, lead, crumbs, body_html, current="about", group="Ynov", color="#B6B0FF", band=True):
+def prose_page(path, title, lead, crumbs, body_html, current="about", group="Ynov", color="#859CFF", band=True):
     base = "../" * path.count("/")
     body = page_hero(base, [("Accueil", "index.html")] + crumbs, title, lead, "", color) + body_html
     if band: body += f'<section class="sec" style="padding:20px 0 90px"><div class="wrap">{cta_band(base)}</div></section>'
@@ -529,7 +532,7 @@ def build_static():
     # Métiers
     mx = max(m[2] for m in METIERS)
     rows = "".join(f'<tr><td><b>{esc(m[1])}</b><br><span class="note">{esc(m[0])}</span></td><td>{m[3]}</td><td><div class="salary"><i style="--w:{m[2]/mx*100:.0f}%"></i><b>{m[2]:,}</b> €</div></td></tr>'.replace(",", " ") for m in sorted(METIERS, key=lambda x: -x[2]))
-    pol = "".join(f'<div class="card hov reveal" style="--d:{i}"><h3 style="color:{pl["color"]}">{esc(pl["nom"])}</h3><ul class="pill-list" style="padding:0;margin:0">' + "".join(f"<li>{esc(m)}</li>" for m in pl["metiers"]) + "</ul></div>" for i, pl in enumerate(POLES))
+    pol = "".join(f'<div class="card hov reveal" style="--d:{i}"><h3><i class="dotc" style="background:{pl["color"]}"></i>{esc(pl["nom"])}</h3><ul class="pill-list" style="padding:0;margin:0">' + "".join(f"<li>{esc(m)}</li>" for m in pl["metiers"]) + "</ul></div>" for i, pl in enumerate(POLES))
     prose_page("metiers.html", "Guide des métiers", "Les débouchés vers lesquels mènent les formations, avec des salaires moyens annuels indicatifs.", [("Métiers", None)],
                f'''<section class="sec" style="padding-top:10px"><div class="wrap"><table class="tbl reveal"><thead><tr><th>Métier</th><th>Niveau d’études</th><th>Salaire moyen annuel</th></tr></thead><tbody>{rows}</tbody></table>
 <h2 class="reveal" style="margin-top:80px">Tu deviendras…</h2><div class="grid g3">{pol}</div></div></section>''', "about")
@@ -669,7 +672,7 @@ def build_projets():
                                                "Modéliser des règles de jeu : économie, combat, progression", "Organiser un projet en modules et le versionner avec Git à plusieurs"])
     chips = '<div class="meta-chips"><span class="mchip"><b>Projet étudiant</b></span><span class="mchip">Ymmersion · <b>B1</b></span><span class="mchip">Ynov <b>Sophia</b></span><span class="mchip">Langage <b>Go</b></span><span class="mchip">Équipe de <b>3</b></span></div>'
     body = page_hero(base, [("Accueil", "index.html"), ("Projets étudiants", "projets.html"), ("Mr Ybot", None)], "Projet RED — « Mr Ybot »",
-                     "Un jeu de rôle en ligne de commande, écrit en Go, dont l’univers emprunte à la cybersécurité : opérateurs, malwares, pare-feu et monnaie en Ethereum.", chips, "#B6B0FF")
+                     "Un jeu de rôle en ligne de commande, écrit en Go, dont l’univers emprunte à la cybersécurité : opérateurs, malwares, pare-feu et monnaie en Ethereum.", chips, "#859CFF")
     body += f"""<section class="sec" style="padding-top:20px"><div class="wrap split" style="align-items:start"><div class="reveal"><span class="eyebrow">Le projet</span><h2>Trois semaines pour passer de zéro à un vrai jeu.</h2>
 <p class="lead">C’est le projet final de l’Ymmersion, la période d’intégration d’Ynov : une piscine Go, un poste de développement configuré, deux jours de Git, puis un sujet commun, le Projet RED, à traiter en équipe.</p>
 <p>L’équipe a gardé les mécaniques demandées par le sujet — personnage, inventaire, marchand, fabrication, combats — et leur a donné un habillage cyber : l’interface, les objets et les ennemis parlent le langage de la sécurité informatique.</p>
@@ -684,10 +687,10 @@ def build_projets():
     page("projets/mr-ybot.html", "Projet RED — Mr Ybot", body, PROJ_BY_SLUG["mr-ybot"]["accroche"], "about", "Projets")
 
     # ---------- RecrutIA
-    meters = [("Précision du modèle", 82, "var(--accent)"), ("Équité entre profils", 54, "var(--mint)"), ("Biais détecté", 38, "var(--coral)")]
+    meters = [("Précision du modèle", 82, "var(--violet)"), ("Équité entre profils", 54, "var(--menthe)"), ("Biais détecté", 38, "var(--rouge)")]
     meter_html = "".join(f'<div class="meter"><div class="mt"><span>{n}</span><b>{v} %</b></div><div class="mb"><i style="--v:{v}%;--c:{c}"></i></div></div>' for n, v, c in meters)
     console = (f'<div class="term light reveal" style="--d:1"><div class="term-bar"><i></i><i></i><i></i><span>console de données — RecrutIA</span></div><div class="term-body" style="font-family:var(--f-body)">'
-               f'<p style="margin:0 0 18px;color:#B8BBD9;font-size:14px">Tri des CV · tableau de bord de l’entraînement</p>{meter_html}</div>'
+               f'<p style="margin:0 0 18px;color:#C3CAC5;font-size:14px">Tri des CV · tableau de bord de l’entraînement</p>{meter_html}</div>'
                f'<p class="term-note">Illustration du thème du jeu : les valeurs sont fictives.</p></div>')
     steps = [("Un rôle", "Tu es data scientist chez RecrutIA, une entreprise fictive dont l’IA trie des CV."), ("Des décisions", "Au fil de 15 pages connectées, chaque choix sur les données d’entraînement fait évoluer l’IA."),
              ("Trois fins", "Selon tes décisions, le modèle devient équitable, biaisé ou ingérable : trois fins possibles."), ("Deux thèmes", "Une version claire avec un bouton jour/nuit, et une version sombre façon « console de données ».")]
@@ -696,7 +699,7 @@ def build_projets():
                                                "Écrire un petit script JavaScript pour le mode jour/nuit", "Raconter une notion d’IA — le biais des données — à travers un jeu"])
     chips = '<div class="meta-chips"><span class="mchip"><b>Projet étudiant</b></span><span class="mchip">Data · <b>B1</b></span><span class="mchip">Ynov <b>Sophia</b></span><span class="mchip"><b>HTML</b> / <b>CSS</b> / JS</span><span class="mchip"><b>15</b> pages</span></div>'
     body = page_hero(base, [("Accueil", "index.html"), ("Projets étudiants", "projets.html"), ("RecrutIA", None)], "RecrutIA — « Survie contre le Biais »",
-                     "Un mini-jeu de décisions en HTML/CSS : tu incarnes un·e data scientist qui entraîne une IA de tri de CV, et tu découvres comment les données fabriquent le biais.", chips, "#E6F59C")
+                     "Un mini-jeu de décisions en HTML/CSS : tu incarnes un·e data scientist qui entraîne une IA de tri de CV, et tu découvres comment les données fabriquent le biais.", chips, "#EEFF57")
     body += f"""<section class="sec" style="padding-top:20px"><div class="wrap split" style="align-items:start"><div class="reveal"><span class="eyebrow">Le projet</span><h2>Apprendre ce qu’est un biais en jouant.</h2>
 <p class="lead">Réalisé en première année dans la filière Data, ce projet web transforme une notion d’IA en histoire à embranchements : quinze pages, trois fins, deux ambiances visuelles.</p>
 <p>L’idée de l’orienter vers l’entraînement d’un modèle de langage est venue de l’étudiant, avec l’aide de son mentor. Le jeu a été renommé « RecrutIA », du nom de l’entreprise fictive.</p>
