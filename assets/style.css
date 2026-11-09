@@ -300,7 +300,7 @@ a.card:hover .motif{transform:rotate(12deg) scale(1.08)}
 .prog .top{display:flex;gap:8px;flex-wrap:wrap}
 .prog h3{font-size:1.2rem;margin:0}
 .prog .fam{font-size:13.5px;color:var(--muted)}
-.prog .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:14px;color:var(--muted)}
+.prog .pfoot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:14px;color:var(--muted)}
 .prog[hidden]{display:none}
 .result-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:16px;flex-wrap:wrap}
 .search{position:relative;flex:1;min-width:240px}

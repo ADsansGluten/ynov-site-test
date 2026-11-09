@@ -89,7 +89,7 @@ def prog_card(p, base, idx=0):
     nb = len(p["campus"]) + (1 if p["online"] else 0)
     return (f'<a class="prog reveal" style="--d:{idx%3}" href="{base}{prog_url(p)}"><div class="top">{badge(p)}</div>'
             f'<h3>{esc(p["titre"])}</h3><div class="fam">{esc(f["nom"])}</div>'
-            f'<div class="foot"><span>{p["duree"]} · dès {esc(p["entree"])}</span><span class="link-ar">{nb} campus <span>→</span></span></div></a>')
+            f'<div class="pfoot"><span>{p["duree"]} · dès {esc(p["entree"])}</span><span class="link-ar">{nb} campus <span>→</span></span></div></a>')
 
 
 def campus_names(p, base, link=True):
